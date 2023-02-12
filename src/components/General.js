@@ -1,71 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 
-export default class General extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            general: [{
-                text: 'First Name',
-                edit: false,
-                id: nanoid()
-            },
-            {
-                text: "Last Name",
-                edit: false,
-                id: nanoid()
-            },
-            {
-                text: "Email",
-                edit: false,
-                id: nanoid()
-            },
-            {
-                text: "Phone Number",
-                edit: false,
-                id: nanoid()
-            }]
-        }
-    }
+export default function General() {
 
-    edit = id => {
-        this.setState(prevState => ({
-            general: prevState.general.map(element => ({
+    const [state, setState] = React.useState([{
+        text: 'First Name',
+        edit: false,
+        id: nanoid()
+    },
+    {
+        text: "Last Name",
+        edit: false,
+        id: nanoid()
+    },
+    {
+        text: "Email",
+        edit: false,
+        id: nanoid()
+    },
+    {
+        text: "Phone Number",
+        edit: false,
+        id: nanoid()
+    }])
+
+
+
+    const edit = id => {
+        setState(prevState => {
+            return prevState.map(element => ({
                 ...element,
                 edit: element.id === id ? !element.edit : element.edit
             }))
-        }))
+        })
     }
 
-    handleChange = (e,id) => {
-        this.setState(prevState => ({
-            general: prevState.general.map(element => ({
+    const handleChange = (e, id) => {
+        setState(prevState => {
+            return prevState.map(element => ({
                 ...element,
-                text : element.id === id ? e.target.value : element.text
+                text: element.id === id ? e.target.value : element.text
             }))
-        }))
-        // console.log(e.target.value)
+        })
     }
 
-    render() {
-        // console.log(this.state.general)
-        const data = this.state.general
         return (
             <div>
                 <h3>General Information</h3>
-                {data.map(element => {
-                    // console.log(element)
+                {state.map(element => {
                     return element.edit === true ?
                         <div key={element.id}>
-                            <input type="text" value={element.text} onChange={(e) => this.handleChange(e,element.id)} />
-                            <button onClick={() => this.edit(element.id)}>Save</button>
+                            <input type="text" value={element.text} onChange={(e) => handleChange(e, element.id)} />
+                            <button onClick={() => edit(element.id)}>Save</button>
                         </div> :
                         <div key={element.id}>
                             <span>{element.text}</span>
-                            <button onClick={() => this.edit(element.id)}>Edit</button>
+                            <button onClick={() => edit(element.id)}>Edit</button>
                         </div>
                 })}
             </div>
         )
-    }
 }
