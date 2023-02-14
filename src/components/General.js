@@ -1,5 +1,6 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
+import '../styels/General.css'
 
 export default function General() {
 
@@ -44,20 +45,23 @@ export default function General() {
         })
     }
 
-        return (
-            <div>
-                <h3>General Information</h3>
+    return (
+        <div className='general'>
+            <h3 className='heading'>General Information</h3>
+            <div className='container'>
                 {state.map(element => {
                     return element.edit === true ?
-                        <div key={element.id}>
+                        <div key={element.id} className='data-point'>
                             <input type="text" value={element.text} onChange={(e) => handleChange(e, element.id)} />
                             <button onClick={() => edit(element.id)}>Save</button>
                         </div> :
-                        <div key={element.id}>
+                        <div key={element.id} className='data-point'>
                             <span>{element.text}</span>
                             <button onClick={() => edit(element.id)}>Edit</button>
                         </div>
                 })}
+                <hr />
             </div>
-        )
+        </div>
+    )
 }
