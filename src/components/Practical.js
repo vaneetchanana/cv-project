@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Practical() {
+export default function Practical(props) {
   const [state, setState] = React.useState({
+    dataType: 'professional',
     companyName: '',
     title: '',
     tasks: '',
@@ -13,13 +14,43 @@ export default function Practical() {
       ...prevState,
       [e.target.id]: e.target.value
     }))
-
-
   }
 
-  function handleData() {
-    console.log(state);
+  function submitData() {
+    props.handleData(state);
+    setState({
+      dataType: 'professional',
+      companyName: '',
+      title: '',
+      tasks: '',
+      experience: ''
+    })
   }
+
+
+  const input = props.data.map((element, index) => {
+    return (
+      <div key={index} className='info-box'>
+        <div className='data-point'>
+          <span>Company Name:</span>
+          <span>{element.companyName}</span>
+        </div>
+        <div className='data-point'>
+          <span>Title:</span>
+          <span>{element.title}</span>
+        </div>
+        <div className='data-point'>
+          <span>Tasks:</span>
+          <span>{element.tasks}</span>
+        </div>
+        <div className='data-point'>
+          <span>Experience:</span>
+          <span>{element.experience}</span>
+        </div>
+        <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>
+      </div>
+    )
+  })
 
   return (
     <div >
@@ -41,8 +72,10 @@ export default function Practical() {
           <label htmlFor="experience">Year Experience </label>
           <input type="text" id="experience" value={state.experience} onChange={handleChange} />
         </div>
-        <button className='submit' onClick={handleData}>Submit data</button>
+        <button className='submit' onClick={submitData}>Submit</button>
       </div>
+      <hr />
+      {input}
     </div>
   )
 }

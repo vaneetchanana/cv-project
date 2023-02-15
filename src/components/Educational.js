@@ -1,11 +1,13 @@
+// import { nanoid } from 'nanoid'
 import React, { useState } from 'react'
 
-export default function Educational() {
+export default function Educational(props) {
   const [state, setState] = useState({
+    dataType: 'educational',
     institution: '',
     qualification: '',
     from: '',
-    to: ''
+    to: '',
   })
 
   function handleChange(e) {
@@ -13,13 +15,42 @@ export default function Educational() {
       ...prevState,
       [e.target.id]: e.target.value
     }))
-
-
   }
 
-  function handleData() {
-    console.log(state);
+  function submitData() {
+    props.handleData(state);
+    setState({
+      dataType: 'educational',
+      institution: '',
+      qualification: '',
+      from: '',
+      to: '',
+    })
   }
+
+  const input = props.data.map((element, index) => {
+    return (
+      <div key={index} className='info-box'>
+        <div className='data-point'>
+          <span>Institution:</span>
+          <span>{element.institution}</span>
+        </div>
+        <div className='data-point'>
+          <span>Qualification:</span>
+          <span>{element.qualification}</span>
+        </div>
+        <div className='data-point'>
+          <span>From:</span>
+          <span>{element.from}</span>
+        </div>
+        <div className='data-point'>
+          <span>To:</span>
+          <span>{element.to}</span>
+        </div>
+        <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>
+      </div>
+    )
+  })
 
 
   return (
@@ -36,15 +67,16 @@ export default function Educational() {
         </div>
         <div className='data-point'>
           <label htmlFor="from">From: </label>
-          <input id='from' type="date" onChange={handleChange} />
+          <input id='from' type="date" onChange={handleChange} value={state.from} />
         </div>
         <div className='data-point'>
           <label htmlFor="to">To: </label>
-          <input id='to' type="date" onChange={handleChange} />
+          <input id='to' type="date" onChange={handleChange} value={state.to} />
         </div>
-        <button className='submit' onClick={handleData}>Submit</button>
+        <button className='submit' onClick={submitData}>Submit</button>
         <hr />
       </div>
+      {input}
     </div>
   )
 }
