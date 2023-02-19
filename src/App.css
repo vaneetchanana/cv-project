@@ -8,6 +8,19 @@
   text-align: center;
 }
 
+.App-button {
+  background-color: darkgray;
+  padding: 10px 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 0;
+  font-weight: 700;
+}
+
+.App-button:hover {
+  background-color: rgb(145, 145, 145);
+}
+
 /* .container {
   max-width: 400px;
 } */
@@ -28,4 +41,8 @@
   padding: 5px 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.final-cv {
+  background-color: white;
 }

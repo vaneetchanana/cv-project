@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="App">
       <h1 className='App-heading'>CV Application</h1>
-      <button onClick={cvEditing}>{cvEdit ? 'Show CV' : 'Edit CV'}</button>
+      <button className='App-button' onClick={cvEditing}>{cvEdit ? 'Show CV' : 'Edit CV'}</button>
       {
         cvEdit ?
           <div>
@@ -92,7 +92,9 @@ function App() {
             <Educational handleData={handleData} data={state.educational} deleteData={deleteData} />
             <Practical handleData={handleData} data={state.professional} deleteData={deleteData} />
           </div> :
-          <div>Here is your cv</div>
+          <div className='final-cv'>
+            
+          </div>
       }
       <button onClick={printData}>Print Data</button>
     </div>
