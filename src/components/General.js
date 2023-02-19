@@ -38,14 +38,7 @@ export default function General(props) {
     //     })
     // }
 
-    // const handleChange = (e, id) => {
-    //     setState(prevState => {
-    //         return prevState.map(element => ({
-    //             ...element,
-    //             text: element.id === id ? e.target.value : element.text
-    //         }))
-    //     })
-    // }
+    
 
     return (
         <div className='general'>
