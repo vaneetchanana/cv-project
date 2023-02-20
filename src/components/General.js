@@ -43,7 +43,7 @@ export default function General(props) {
     return (
         <div className='general'>
             <h3 className='heading'>General Information</h3>
-            <div className='container'>
+           {props.cvEdit ? <div className='container'>
                 {data.map(element => {
                     return element.edit === true ?
                         <div key={element.id} className='data-point'>
@@ -55,8 +55,17 @@ export default function General(props) {
                             <button onClick={() => edit(element.id)}>Edit</button>
                         </div>
                 })}
-                <hr />
+            </div> :
+            <div>
+                {data.map(elemet => (
+                    <div className='data-point' key={elemet.id}>
+                        <span>{elemet.name}:</span>
+                        <span>{elemet.text}</span>
+                    </div>
+                ))}
             </div>
+            }
+                <hr />
         </div>
     )
 }

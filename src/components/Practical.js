@@ -47,7 +47,7 @@ export default function Practical(props) {
           <span>Experience:</span>
           <span>{element.experience}</span>
         </div>
-        <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>
+        {props.cvEdit && <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>}
       </div>
     )
   })
@@ -55,7 +55,7 @@ export default function Practical(props) {
   return (
     <div >
       <h3 className='heading'>Practical Experience</h3>
-      <div className='container'>
+      {props.cvEdit && <div className='container'>
         <div className='data-point'>
           <label htmlFor="companyName">Company Name </label>
           <input type="text" id="companyName" value={state.companyName} onChange={handleChange} />
@@ -73,8 +73,8 @@ export default function Practical(props) {
           <input type="text" id="experience" value={state.experience} onChange={handleChange} />
         </div>
         <button className='submit' onClick={submitData}>Submit</button>
-      </div>
-      <hr />
+        <hr />
+      </div>}
       {input}
     </div>
   )

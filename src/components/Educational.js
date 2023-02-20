@@ -47,7 +47,7 @@ export default function Educational(props) {
           <span>To:</span>
           <span>{element.to}</span>
         </div>
-        <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>
+        {props.cvEdit && <button onClick={() => props.deleteData(index, element.dataType)}>Delete</button>}
       </div>
     )
   })
@@ -56,7 +56,7 @@ export default function Educational(props) {
   return (
     <div>
       <h3>Educational Experience</h3>
-      <div className='container'>
+      {props.cvEdit && <div className='container'>
         <div className='data-point'>
           <label htmlFor="institution">Institution: </label>
           <input id='institution' type="text" value={state.institution} onChange={handleChange} />
@@ -75,7 +75,7 @@ export default function Educational(props) {
         </div>
         <button className='submit' onClick={submitData}>Submit</button>
         <hr />
-      </div>
+      </div>}
       {input}
     </div>
   )

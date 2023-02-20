@@ -9,21 +9,25 @@ import './App.css'
 function App() {
   const [state, setState] = useState({
     general: [{
+      name : 'First Name',
       text: "First Name",
       edit: false,
       id: nanoid()
     },
     {
+      name : 'Last Name',
       text: "Last Name",
       edit: false,
       id: nanoid()
     },
     {
+      name : 'Email',
       text: "Email",
       edit: false,
       id: nanoid()
     },
     {
+      name : 'Phone Number',
       text: "Phone Number",
       edit: false,
       id: nanoid()
@@ -73,7 +77,7 @@ function App() {
   const deleteData = (id, dataType) => {
     setState(prevState => ({
       ...prevState,
-      [dataType] : prevState[dataType].filter((element,index) => {
+      [dataType]: prevState[dataType].filter((element, index) => {
         return index !== id
       })
     }))
@@ -85,18 +89,15 @@ function App() {
     <div className="App">
       <h1 className='App-heading'>CV Application</h1>
       <button className='App-button' onClick={cvEditing}>{cvEdit ? 'Show CV' : 'Edit CV'}</button>
-      {
-        cvEdit ?
-          <div>
-            <General data={state.general} edit={edit} handleChange={handleChange} />
-            <Educational handleData={handleData} data={state.educational} deleteData={deleteData} />
-            <Practical handleData={handleData} data={state.professional} deleteData={deleteData} />
-          </div> :
-          <div className='final-cv'>
+      <div>
+        <General data={state.general} cvEdit={cvEdit} edit={edit} handleChange={handleChange} />
+        <Educational handleData={handleData} cvEdit={cvEdit} data={state.educational} deleteData={deleteData} />
+        <Practical handleData={handleData} cvEdit={cvEdit} data={state.professional} deleteData={deleteData} />
+      </div>
+      {/* <div className='final-cv'>
             
-          </div>
-      }
-      <button onClick={printData}>Print Data</button>
+          </div> */}
+      {/* <button onClick={printData}>Print Data</button> */}
     </div>
   );
 }
